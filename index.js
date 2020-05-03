@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParse = require('body-parser');
 const connection = require('./database/database');
+const categoriesController = require('./categories/categoriesController');
+const articlesController = require('./articles/articlesController');
 
 //view engine
 app.set('view engine', 'ejs');
@@ -19,6 +21,10 @@ connection.authenticate().then(() => {
 }).catch((erro) => {
     console.log('Conexao erro: '+erro);
 });
+
+//externs routers config
+app.use('/',categoriesController);
+app.use('/',articlesController);
 
 app.get('/',(req, res) => {
     res.render('index');
