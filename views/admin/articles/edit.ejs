@@ -4,22 +4,30 @@
     <hr>
     <div class="card">
         <div class="card-header">
-            <h2>Novo Artigo</h2>
+            <h2>Edite Artigo</h2>
         </div>
         <div class="card-body">
-            <form method="POST" action="/articles/save">
-                <input class="form-control" type="text" name="title" placeholder="Defina o titulo do artigo">
+            <form method="POST" action="/articles/update">
+                <input type="hidden" name="idArticle" value="<%= article.id %>">
+                <input class="form-control" type="text" name="title" placeholder="Defina o titulo do artigo"
+                value="<%= article.title %>">
                 <br>
-                <textarea class="form-control" name="body" placeholder="Escreve o artigo aqui" id="article"></textarea>
+                <textarea class="form-control" name="body" placeholder="Escreve o artigo aqui" id="article">
+                    <%= article.body %>
+                </textarea>
                 <br>
                 <label>Categoria:</label>
                 <select name="idCategory" class="form-control">
                     <% categories.forEach(category => { %>
-                        <option value="<%= category.id %>"><%= category.title %></option>
+                        <% if (article.categoryId == category.id) { %>
+                            <option value="<%= category.id %>" selected><%= category.title %></option>
+                        <% } else { %>
+                            <option value="<%= category.id %>"><%= category.title %></option>
+                        <% } %>
                     <% }) %>
                 </select>
                 <br>
-                <button class="btn btn-primary">Cadastrar</button> 
+                <button class="btn btn-primary">Salvar</button> 
             </form>
         </div>
     </div>

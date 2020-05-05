@@ -50,14 +50,13 @@ router.get('/admin/categories/edit/:id', (req, res) => {
     if (isNaN(id)) {
         res.redirect('/admin/categories');
     }
-    console.log('id busca: ' + id);
+
     modelCategory.findByPk(id).then(category => {
         if (category != undefined) {
             res.render('admin/categories/edit', {
                 category: category
             });
         }
-        console.log('entrou /admin/categories');
         res.redirect('/admin/categories');
     }).catch(erro => {
         res.redirect('/admin/categories');
@@ -75,7 +74,6 @@ router.post('/categories/update', (req, res) => {
     }).then(() => {
         res.redirect('/admin/categories');
     });
-
 });
 
 module.exports = router;
