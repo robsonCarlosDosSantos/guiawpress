@@ -21,11 +21,13 @@
                 <th><%= category.title %></th>
                 <th><%= category.slug %></th>
                 <th>
-                    <a class="btn btn-warning" href="/admin/categories/edit/<%= category.id %>">Editar</a>
-                    <form method="POST" action="/categories/delete" style="display: inline;" onsubmit="validateDelete(event, this);">
-                        <input type="hidden" name="idCategory" value="<%= category.id %>">
-                        <button class="btn btn-danger">Excluir</button>
-                    </form>
+                    <div class="btn-group">
+                        <a class="btn btn-warning" href="/admin/categories/edit/<%= category.id %>">Editar</a>
+                        <form method="POST" action="/categories/delete" onsubmit="validateDelete(event, this);">
+                            <input type="hidden" name="idCategory" value="<%= category.id %>">
+                            <button class="btn btn-danger">Excluir</button>
+                        </form>
+                    </div>
                 </th>
             </tr>
             <% })%>
@@ -34,10 +36,10 @@
 </div>
 <%- include('../../partials/footer.ejs')%>
 <script>
-    function validateDelete(event, form){
+    function validateDelete(event, form) {
         event.preventDefault();
         var decision = confirm("Deseja deletar categoria?");
-        if(decision){
+        if (decision) {
             form.submit();
         }
     }
